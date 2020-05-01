@@ -2,6 +2,7 @@ package com.example.recyclerview;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewFragm
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
+    private CardView navigationViewCardView;
 
 
     @Override
@@ -28,8 +30,18 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewFragm
 
         navigationView = findViewById(R.id.navigationView);
         drawerLayout = findViewById(R.id.drawerLayout);
+        View headerView = navigationView.getHeaderView(0);
+        navigationViewCardView = headerView.findViewById(R.id.navHeaderCardView);
 
         navigationView.setNavigationItemSelectedListener(this);
+
+
+        navigationViewCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "Cambiando foto de perfil...", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         //pegar el fragment.
         RecyclerViewFragment recyclerViewFragment = new RecyclerViewFragment();
