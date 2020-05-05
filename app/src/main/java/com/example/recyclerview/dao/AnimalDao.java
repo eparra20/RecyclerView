@@ -1,12 +1,17 @@
-package com.example.recyclerview;
+package com.example.recyclerview.dao;
+
+import com.example.recyclerview.R;
+import com.example.recyclerview.model.Animal;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Clase que va a proveer de el listado de animales
+ * DAO
+ * Data Access Object
  */
-public abstract class ProveedorDeAnimales {
+public abstract class AnimalDao {
 
     public static List<Animal> getAnimales() {
         List<Animal> animalList = new ArrayList<>();

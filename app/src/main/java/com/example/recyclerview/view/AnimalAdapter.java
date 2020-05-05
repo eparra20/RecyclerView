@@ -1,14 +1,16 @@
-package com.example.recyclerview;
+package com.example.recyclerview.view;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.recyclerview.R;
+import com.example.recyclerview.model.Animal;
 
 import java.util.List;
 

@@ -1,11 +1,11 @@
-package com.example.recyclerview;
+package com.example.recyclerview.view;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
+
+import com.example.recyclerview.R;
 
 public class DetailActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.example.recyclerview;
+package com.example.recyclerview.view;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,7 +14,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.recyclerview.R;
+import com.example.recyclerview.model.Animal;
 import com.google.android.material.navigation.NavigationView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements RecyclerViewFragment.RecyclerViewFragmentListener, NavigationView.OnNavigationItemSelectedListener {
 
@@ -46,7 +51,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewFragm
         //pegar el fragment.
         RecyclerViewFragment recyclerViewFragment = new RecyclerViewFragment();
         pegarFragment(recyclerViewFragment);
-
     }
 
     private void setNavigationViewListener() {
@@ -83,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewFragm
     @Override
     public void onClickAnimalDesdeFragment(Animal animal) {
 
-        Intent unIntent = new Intent(this,DetailActivity.class);
+        Intent unIntent = new Intent(this, DetailActivity.class);
 
         Bundle bundle = new Bundle();
 
