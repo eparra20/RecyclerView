@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.recyclerview.R;
 import com.example.recyclerview.controller.PhotoController;
 import com.example.recyclerview.model.Photo;
@@ -39,8 +40,12 @@ public class FavoritoFragment extends Fragment {
         photoController.getPhoto("10", new ResultListener<Photo>() {
             @Override
             public void onFinish(Photo result) {
-
-                Toast.makeText(getContext(), result.getUrl().toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), result.getUrl(), Toast.LENGTH_SHORT).show();
+                Glide.with(FavoritoFragment.this)
+                        .asGif()
+                        .load("https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/source.gif")
+                        .error(R.drawable.gatito_a)
+                        .into(imageView);
             }
         });
 
