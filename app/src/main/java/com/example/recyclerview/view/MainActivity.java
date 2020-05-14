@@ -51,6 +51,9 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewFragm
         //pegar el fragment.
         RecyclerViewFragment recyclerViewFragment = new RecyclerViewFragment();
         pegarFragment(recyclerViewFragment);
+
+
+        Toast.makeText(this, "hasta aca llego el codigo, aguante no debugear", Toast.LENGTH_SHORT).show();
     }
 
     private void setNavigationViewListener() {
