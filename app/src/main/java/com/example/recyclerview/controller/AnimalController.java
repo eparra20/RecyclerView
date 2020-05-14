@@ -16,13 +16,6 @@ public class AnimalController {
 
     public void getAnimals(ResultListener<List<Animal>> resultListenerDeLaView) {
 
-        //va a internet, y la respuesta tarda 5 seg
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-
-        }
-
         if (hayInternet()) {
             //ir a internet y buscar los animales.
              new ArrayList<>();
