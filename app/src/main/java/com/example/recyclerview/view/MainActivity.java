@@ -1,19 +1,22 @@
 package com.example.recyclerview.view;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
 
 import com.example.recyclerview.R;
 import com.example.recyclerview.model.Animal;
@@ -26,30 +29,20 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewFragm
     private NavigationView navigationView;
     private CardView navigationViewCardView;
     private BottomNavigationView bottomNavigationView;
-
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        bottomNavigationView = findViewById(R.id.activityMainBottomNavigationView);
-        navigationView = findViewById(R.id.navigationView);
-        drawerLayout = findViewById(R.id.drawerLayout);
+        findViews();
 
-        View headerView = navigationView.getHeaderView(0);
-        navigationViewCardView = headerView.findViewById(R.id.navHeaderCardView);
+        configurarToolBar();
 
-        setNavigationViewListener();
+        configurarNavigationView();
+
         setBottomNavigationViewListener();
-
-
-        navigationViewCardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "Cambiando foto de perfil...", Toast.LENGTH_SHORT).show();
-            }
-        });
 
         //pegar el fragment.
         RecyclerViewFragment recyclerViewFragment = new RecyclerViewFragment();
@@ -61,25 +54,67 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewFragm
         Toast.makeText(this, "hasta aca llego el codigo, aguante no debugear", Toast.LENGTH_SHORT).show();
     }
 
+    private void configurarNavigationView() {
+        View headerView = navigationView.getHeaderView(0);
+        navigationViewCardView = headerView.findViewById(R.id.navHeaderCardView);
+        setNavigationViewListener();
+    }
+
+    /**
+     * Metodo para configurar la toolbar,
+     * ALERTA este metodo tiene que ejecutarse despues de {@link #findViews()}
+     */
+    private void configurarToolBar() {
+        setSupportActionBar(toolbar);
+        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.open_drawers,R.string.close_drawers);
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
+    }
+
+    /**
+     * Metodo para aplicar los findViewById de cada elemento visual
+     */
+    private void findViews() {
+        bottomNavigationView = findViewById(R.id.activityMainBottomNavigationView);
+        navigationView = findViewById(R.id.navigationView);
+        drawerLayout = findViewById(R.id.drawerLayout);
+        toolbar = findViewById(R.id.activityMainToolbar);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.bo_menu,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        onBoMenuListener(item);
+        return true;
+    }
+
     private void setBottomNavigationViewListener() {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.boHome:
-                        Toast.makeText(MainActivity.this, "En Construccion", Toast.LENGTH_SHORT).show();
-                        break;
-                    case R.id.boSearch:
-                        Toast.makeText(MainActivity.this, "En Construccion", Toast.LENGTH_SHORT).show();
-                        break;
-                    case R.id.boLibrary:
-                        drawerLayout.openDrawer(GravityCompat.START);
-                        break;
-                }
-
+                onBoMenuListener(item);
                 return true;
             }
         });
+    }
+
+    private void onBoMenuListener(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.boHome:
+                Toast.makeText(MainActivity.this, "En Construccion", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.boSearch:
+                Toast.makeText(MainActivity.this, "En Construccion", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.boLibrary:
+                drawerLayout.openDrawer(GravityCompat.START);
+                break;
+        }
     }
 
 
