@@ -3,7 +3,6 @@ package com.example.recyclerview.view;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -17,7 +16,6 @@ import android.widget.Toast;
 
 import com.example.recyclerview.R;
 import com.example.recyclerview.model.Animal;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
@@ -28,7 +26,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewFragm
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private CardView navigationViewCardView;
-    private BottomNavigationView bottomNavigationView;
 
 
     @Override
@@ -36,15 +33,12 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewFragm
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        bottomNavigationView = findViewById(R.id.activityMainBottomNavigationView);
         navigationView = findViewById(R.id.navigationView);
         drawerLayout = findViewById(R.id.drawerLayout);
-
         View headerView = navigationView.getHeaderView(0);
         navigationViewCardView = headerView.findViewById(R.id.navHeaderCardView);
 
         navigationView.setNavigationItemSelectedListener(this);
-        setBottomNavigationViewListener();
 
 
         navigationViewCardView.setOnClickListener(new View.OnClickListener() {
@@ -62,28 +56,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewFragm
         Toast.makeText(this, "hasta aca llego el codigo, aguante no debugear", Toast.LENGTH_SHORT).show();
     }
 
-    private void setBottomNavigationViewListener(){
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.boHome:
-                        Toast.makeText(MainActivity.this, "En Construccion", Toast.LENGTH_SHORT).show();
-                        break;
-                    case R.id.boSearch:
-                        Toast.makeText(MainActivity.this, "En Construccion", Toast.LENGTH_SHORT).show();
-                        break;
-                    case R.id.boLibrary:
-                        drawerLayout.openDrawer(GravityCompat.START);
-                        break;
-                }
-
-                return true;
-            }
-        });
-    }
-
-
     private void setNavigationViewListener() {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -99,6 +71,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewFragm
                         drawerLayout.closeDrawers();
                         break;
                     default:
+                        Toast.makeText(MainActivity.this, "En construccion", Toast.LENGTH_SHORT).show();
                         break;
                 }
 

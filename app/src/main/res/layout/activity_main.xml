@@ -10,26 +10,11 @@
 
 
 
-    <RelativeLayout
+
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/activityMainContenedorFragment"/>
-
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/activityMainBottomNavigationView"
-            android:layout_alignBottom="@id/activityMainContenedorFragment"
-            android:background="#910A0A"
-            app:menu="@menu/bo_menu"
-
-            />
-    </RelativeLayout>
-
+        android:layout_height="match_parent"
+        android:id="@+id/activityMainContenedorFragment"/>
 
     <com.google.android.material.navigation.NavigationView
         android:layout_width="match_parent"
