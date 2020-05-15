@@ -20,10 +20,7 @@ import com.example.recyclerview.model.Animal;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class MainActivity extends AppCompatActivity implements RecyclerViewFragment.RecyclerViewFragmentListener, NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements RecyclerViewFragment.RecyclerViewFragmentListener {
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
@@ -43,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewFragm
         View headerView = navigationView.getHeaderView(0);
         navigationViewCardView = headerView.findViewById(R.id.navHeaderCardView);
 
-        navigationView.setNavigationItemSelectedListener(this);
+        setNavigationViewListener();
         setBottomNavigationViewListener();
 
 
@@ -64,11 +61,11 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewFragm
         Toast.makeText(this, "hasta aca llego el codigo, aguante no debugear", Toast.LENGTH_SHORT).show();
     }
 
-    private void setBottomNavigationViewListener(){
+    private void setBottomNavigationViewListener() {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.boHome:
                         Toast.makeText(MainActivity.this, "En Construccion", Toast.LENGTH_SHORT).show();
                         break;
@@ -90,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewFragm
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.menuInicio:
                         Toast.makeText(MainActivity.this, "Presionaron inicio", Toast.LENGTH_SHORT).show();
                         drawerLayout.closeDrawers();
@@ -101,9 +98,9 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewFragm
                         drawerLayout.closeDrawers();
                         break;
                     default:
+                        Toast.makeText(MainActivity.this, "En construccion", Toast.LENGTH_SHORT).show();
                         break;
                 }
-
                 return true;
             }
         });
@@ -112,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewFragm
     private void pegarFragment(Fragment fragment) {
         FragmentManager supportFragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = supportFragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.activityMainContenedorFragment,fragment);
+        fragmentTransaction.replace(R.id.activityMainContenedorFragment, fragment);
         fragmentTransaction.commit();
     }
 
@@ -123,29 +120,12 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewFragm
 
         Bundle bundle = new Bundle();
 
-        bundle.putSerializable(DetailFragment.ANIMAL,animal);
+        bundle.putSerializable(DetailFragment.ANIMAL, animal);
 
         unIntent.putExtras(bundle);
 
         startActivity(unIntent);
     }
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.menuInicio:
-                Toast.makeText(MainActivity.this, "Presionaron inicio", Toast.LENGTH_SHORT).show();
-                drawerLayout.closeDrawers();
-                break;
-            case R.id.menuFavorito:
-                FavoritoFragment favoritoFragment = new FavoritoFragment();
-                pegarFragment(favoritoFragment);
-                drawerLayout.closeDrawers();
-                break;
-            default:
-                Toast.makeText(MainActivity.this, "En construccion", Toast.LENGTH_SHORT).show();
-                break;
-        }
-        return true;
-    }
+
 }
