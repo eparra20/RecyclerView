@@ -132,6 +132,10 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewFragm
                         pegarFragment(favoritoFragment);
                         drawerLayout.closeDrawers();
                         break;
+                    case R.id.menuPerfil:
+                        Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+                        startActivity(intent);
+                        break;
                     default:
                         Toast.makeText(MainActivity.this, "En construccion", Toast.LENGTH_SHORT).show();
                         break;
