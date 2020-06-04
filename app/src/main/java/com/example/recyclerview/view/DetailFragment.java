@@ -1,11 +1,13 @@
 package com.example.recyclerview.view;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -26,11 +28,17 @@ public class DetailFragment extends Fragment {
 
     private Toolbar toolbar;
     private FragmentDetailBinding binding;
+    private DetailFragmentListener detailFragmentListener;
 
     public DetailFragment() {
         // Required empty public constructor
     }
 
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        this.detailFragmentListener = (DetailFragmentListener) context;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,6 +61,13 @@ public class DetailFragment extends Fragment {
       //  binding.fragmentDetailTextViewNombreAnimal.setText(animal.getNombre());
         toolbar.setTitle(animal.getNombre());
 
+        binding.unButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                detailFragmentListener.onClickFloating();
+            }
+        });
+
         return view;
     }
 
@@ -69,4 +84,8 @@ public class DetailFragment extends Fragment {
         binding = null;
     }
 
+
+    public interface DetailFragmentListener{
+        public void onClickFloating();
+    }
 }
