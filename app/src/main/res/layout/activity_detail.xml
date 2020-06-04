@@ -7,7 +7,7 @@
     android:orientation="vertical"
     tools:context=".view.DetailActivity">
 
-    <include layout="@layout/my_toolbar"/>
+
 
     <FrameLayout
         android:layout_width="match_parent"

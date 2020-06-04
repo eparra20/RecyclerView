@@ -1,37 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.DetailFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".view.DetailFragment">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:id="@+id/fragmentDetailImageView"/>
 
-    <TextView
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="40dp"
-        android:text="Nombre Animal"
-        android:id="@+id/fragmentDetailTextViewNombreAnimal"/>
+        android:id="@+id/appBar">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:expandedTitleGravity="bottom|start|left"
+            android:fitsSystemWindows="true"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+            >
+
+            <ImageView
+                android:id="@+id/fragmentDetailImageView"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:scaleType="centerCrop"
+                tools:src="@drawable/gatito_c"
+                android:fitsSystemWindows="true"
+                app:layout_collapseMode="pin"
+                />
+
+
+            <androidx.appcompat.widget.Toolbar xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/activityMainToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                android:background="#353232"
+                app:titleTextColor="#FFFFFF"
+                app:layout_collapseMode="pin"/>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/unButton"
-        android:text="Compartir"
-        android:background="#FFB806"/>
-
-    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/otroBotton"
-        android:text="Compartir"
-        android:background="#FFB806"/>
+        android:layout_marginRight="10dp"
+        android:backgroundTint="#D80E0E"
+        android:src="@drawable/ic_add_black_24dp"
+        app:layout_anchor="@id/appBar"
+        app:layout_anchorGravity="bottom|right" />
 
 
 
-</LinearLayout>
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/lorem"
+
+          />
+    </androidx.core.widget.NestedScrollView>
+
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

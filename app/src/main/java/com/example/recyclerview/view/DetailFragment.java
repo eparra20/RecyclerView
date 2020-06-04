@@ -6,8 +6,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
+import com.example.recyclerview.R;
 import com.example.recyclerview.databinding.FragmentDetailBinding;
 import com.example.recyclerview.model.Animal;
 
@@ -20,6 +24,7 @@ public class DetailFragment extends Fragment {
 
     public static final String ANIMAL = "animal";
 
+    private Toolbar toolbar;
     private FragmentDetailBinding binding;
 
     public DetailFragment() {
@@ -38,17 +43,23 @@ public class DetailFragment extends Fragment {
 
         Animal animal = (Animal) bundle.getSerializable(ANIMAL);
 
-        binding.fragmentDetailImageView.setImageResource(animal.getImagen());
-        binding.fragmentDetailTextViewNombreAnimal.setText(animal.getNombre());
+        getActivity().getSupportFragmentManager();
 
-        binding.otroBotton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(), "Otra tostada", Toast.LENGTH_SHORT).show();
-            }
-        });
+        toolbar = binding.activityMainToolbar;
+
+        configurarToolBarEnFragment();
+
+        binding.fragmentDetailImageView.setImageResource(animal.getImagen());
+      //  binding.fragmentDetailTextViewNombreAnimal.setText(animal.getNombre());
+        toolbar.setTitle(animal.getNombre());
 
         return view;
+    }
+
+    private void configurarToolBarEnFragment() {
+        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+        ActionBar supportActionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
+        supportActionBar.setDisplayHomeAsUpEnabled(true);
     }
 
 
