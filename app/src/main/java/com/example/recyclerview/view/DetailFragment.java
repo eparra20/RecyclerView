@@ -1,16 +1,14 @@
 package com.example.recyclerview.view;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.Toast;
 
-import com.example.recyclerview.R;
+import androidx.fragment.app.Fragment;
+
+import com.example.recyclerview.databinding.FragmentDetailBinding;
 import com.example.recyclerview.model.Animal;
 
 
@@ -22,6 +20,8 @@ public class DetailFragment extends Fragment {
 
     public static final String ANIMAL = "animal";
 
+    private FragmentDetailBinding binding;
+
     public DetailFragment() {
         // Required empty public constructor
     }
@@ -31,19 +31,31 @@ public class DetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view  =  inflater.inflate(R.layout.fragment_detail, container, false);
+        binding = FragmentDetailBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
 
         Bundle bundle = getArguments();
 
         Animal animal = (Animal) bundle.getSerializable(ANIMAL);
 
-        ImageView imageViewAnimal = view.findViewById(R.id.fragmentDetailImageView);
-        TextView textViewAnimal = view.findViewById(R.id.fragmentDetailTextViewNombreAnimal);
+        binding.fragmentDetailImageView.setImageResource(animal.getImagen());
+        binding.fragmentDetailTextViewNombreAnimal.setText(animal.getNombre());
 
-        imageViewAnimal.setImageResource(animal.getImagen());
-        textViewAnimal.setText(animal.getNombre());
+        binding.otroBotton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "Otra tostada", Toast.LENGTH_SHORT).show();
+            }
+        });
 
-        return  view;
+        return view;
+    }
+
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 
 }

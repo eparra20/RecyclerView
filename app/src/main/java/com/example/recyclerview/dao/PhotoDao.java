@@ -48,7 +48,7 @@ public class PhotoDao {
                 }
             }
 
-            //cuando directamente no se hjace la peticion
+            //cuando directamente no se hace la peticion
             @Override
             public void onFailure(Call<Photo> call, Throwable t) {
                 t.printStackTrace();

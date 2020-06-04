@@ -1,8 +1,5 @@
 package com.example.recyclerview.view;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -14,6 +11,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.recyclerview.R;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -23,12 +23,10 @@ import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInApi;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.tasks.OnCanceledListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
@@ -40,15 +38,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
     private static final int RC_SIGN_IN = 1;
+    private static final String EMAIL = "email";
     private Button buttonInicioSesion;
     private SignInButton signInButton;
     private GoogleSignInClient mGoogleSignInClient;
-
     private Button buttonLogout;
     private CallbackManager callbackManager;
-
-
-    private static final String EMAIL = "email";
     private LoginButton loginButton;
 
     @Override
@@ -77,8 +72,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         callbackManager = CallbackManager.Factory.create();
 
 
-
-        loginButton =  findViewById(R.id.login_button);
+        loginButton = findViewById(R.id.login_button);
         loginButton.setReadPermissions(Arrays.asList(EMAIL));
         // If you are using in a fragment, call loginButton.setFragment(this);
 
@@ -105,7 +99,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
-    private void getKeyHash(){
+    private void getKeyHash() {
         // Add code to print out the key hash
         try {
             PackageInfo info = getPackageManager().getPackageInfo(

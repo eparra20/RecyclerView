@@ -1,6 +1,7 @@
 package com.example.recyclerview.view;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -8,37 +9,55 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.recyclerview.R;
+import com.example.recyclerview.databinding.ActivityMainBinding;
 import com.example.recyclerview.model.Animal;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class MainActivity extends AppCompatActivity implements RecyclerViewFragment.RecyclerViewFragmentListener {
 
-    private DrawerLayout drawerLayout;
-    private NavigationView navigationView;
-    private CardView navigationViewCardView;
-    private BottomNavigationView bottomNavigationView;
-    private Toolbar toolbar;
 
+    private CardView navigationViewCardView;
+    private ActivityMainBinding binding;
+
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
 
-        findViews();
+
+        List<Integer> integerList = new ArrayList<>();
+        integerList.add(10);integerList.add(30);integerList.add(70);integerList.add(6);integerList.add(30);integerList.add(4501);integerList.add(2424);
+        integerList.add(2);integerList.add(5);integerList.add(6);integerList.add(50);integerList.add(2);integerList.add(452);integerList.add(124);
+
+        List<Integer> resultado = new ArrayList<>();
+        for (Integer integer : integerList) {
+            if (integer % 2 != 0){
+                resultado.add(integer);
+            }
+        }
 
         configurarToolBar();
+
 
         configurarNavigationView();
 
@@ -55,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewFragm
     }
 
     private void configurarNavigationView() {
-        View headerView = navigationView.getHeaderView(0);
+        View headerView = binding.navigationView.getHeaderView(0);
         navigationViewCardView = headerView.findViewById(R.id.navHeaderCardView);
         setNavigationViewListener();
     }
@@ -65,25 +84,15 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewFragm
      * ALERTA este metodo tiene que ejecutarse despues de {@link #findViews()}
      */
     private void configurarToolBar() {
-        setSupportActionBar(toolbar);
-        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.open_drawers,R.string.close_drawers);
-        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        setSupportActionBar(binding.includeToolBar.activityMainToolbar);
+        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, binding.drawerLayout, binding.includeToolBar.activityMainToolbar, R.string.open_drawers, R.string.close_drawers);
+        binding.drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
-    }
-
-    /**
-     * Metodo para aplicar los findViewById de cada elemento visual
-     */
-    private void findViews() {
-        bottomNavigationView = findViewById(R.id.activityMainBottomNavigationView);
-        navigationView = findViewById(R.id.navigationView);
-        drawerLayout = findViewById(R.id.drawerLayout);
-        toolbar = findViewById(R.id.activityMainToolbar);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.bo_menu,menu);
+        getMenuInflater().inflate(R.menu.bo_menu, menu);
         return true;
     }
 
@@ -94,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewFragm
     }
 
     private void setBottomNavigationViewListener() {
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        binding.activityMainBottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 onBoMenuListener(item);
@@ -112,28 +121,28 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewFragm
                 Toast.makeText(MainActivity.this, "En Construccion", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.boLibrary:
-                drawerLayout.openDrawer(GravityCompat.START);
+                binding.drawerLayout.openDrawer(GravityCompat.START);
                 break;
         }
     }
 
 
     private void setNavigationViewListener() {
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+        binding.navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.menuInicio:
                         Toast.makeText(MainActivity.this, "Presionaron inicio", Toast.LENGTH_SHORT).show();
-                        drawerLayout.closeDrawers();
+                        binding.drawerLayout.closeDrawers();
                         break;
                     case R.id.menuFavorito:
                         FavoritoFragment favoritoFragment = new FavoritoFragment();
                         pegarFragment(favoritoFragment);
-                        drawerLayout.closeDrawers();
+                        binding.drawerLayout.closeDrawers();
                         break;
                     case R.id.menuPerfil:
-                        Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+                        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                         startActivity(intent);
                         break;
                     default:

@@ -1,10 +1,18 @@
 package com.example.recyclerview.dao;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import com.example.recyclerview.R;
 import com.example.recyclerview.model.Animal;
+import com.example.recyclerview.model.Direccion;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Clase que va a proveer de el listado de animales
@@ -13,6 +21,7 @@ import java.util.List;
  */
 public abstract class AnimalDao {
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public static List<Animal> getAnimales() {
         List<Animal> animalList = new ArrayList<>();
 
@@ -27,7 +36,6 @@ public abstract class AnimalDao {
 
         animalList.add(new Animal("Gatito C", R.drawable.gatito_c));
         animalList.add(new Animal("Gatito Egipcio", R.drawable.gatito_egipcio));
-
 
         return animalList;
     }

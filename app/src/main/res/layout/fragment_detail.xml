@@ -25,4 +25,13 @@
         android:text="Compartir"
         android:background="#FFB806"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/otroBotton"
+        android:text="Compartir"
+        android:background="#FFB806"/>
+
+
+
 </LinearLayout>

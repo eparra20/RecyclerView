@@ -19,7 +19,7 @@ public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.ViewHolder
     private List<Animal> animalList;
     private AnimalAdapterListener animalAdapterListener;
 
-    public AnimalAdapter(List<Animal> animalList,AnimalAdapterListener listener) {
+    public AnimalAdapter(List<Animal> animalList, AnimalAdapterListener listener) {
         this.animalList = animalList;
         this.animalAdapterListener = listener;
     }
@@ -45,6 +45,10 @@ public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.ViewHolder
     }
 
 
+    public interface AnimalAdapterListener {
+        void onClickAnimal(Animal animal);
+    }
+
     //La representacion de mi celda.
     protected class ViewHolderAnimal extends RecyclerView.ViewHolder {
 
@@ -69,9 +73,5 @@ public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.ViewHolder
             imageViewAnimal.setImageResource(animal.getImagen());
             textViewNombreAnimal.setText(animal.getNombre());
         }
-    }
-
-    public interface AnimalAdapterListener{
-        public void onClickAnimal(Animal animal);
     }
 }

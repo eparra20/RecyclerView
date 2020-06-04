@@ -1,11 +1,11 @@
 package com.example.recyclerview.view;
 
+import android.content.Intent;
+import android.os.Bundle;
+
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
-import android.content.Intent;
-import android.os.Bundle;
 
 import com.example.recyclerview.R;
 
@@ -36,7 +36,7 @@ public class DetailActivity extends AppCompatActivity {
 
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.detailActivityContenedorFragment,detailFragment)
+                .replace(R.id.detailActivityContenedorFragment, detailFragment)
                 .commit();
 
 
