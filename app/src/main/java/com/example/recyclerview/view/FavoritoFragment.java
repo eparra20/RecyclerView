@@ -47,6 +47,11 @@ public class FavoritoFragment extends Fragment {
                         .error(R.drawable.gatito_a)
                         .into(imageView);
             }
+
+            @Override
+            public void onError(String message) {
+
+            }
         });
 
 

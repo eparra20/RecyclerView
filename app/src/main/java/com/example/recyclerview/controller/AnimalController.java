@@ -1,6 +1,7 @@
 package com.example.recyclerview.controller;
 
 import com.example.recyclerview.dao.AnimalDao;
+import com.example.recyclerview.dao.AnimalDaoFirebase;
 import com.example.recyclerview.model.Animal;
 import com.example.recyclerview.util.ResultListener;
 
@@ -14,6 +15,13 @@ import javax.xml.transform.Result;
  */
 public class AnimalController {
 
+
+    private AnimalDaoFirebase animalDaoFirebase;
+
+    public AnimalController() {
+        this.animalDaoFirebase = new AnimalDaoFirebase();
+    }
+
     public void getAnimals(ResultListener<List<Animal>> resultListenerDeLaView) {
 
         if (hayInternet()) {
@@ -21,7 +29,18 @@ public class AnimalController {
              new ArrayList<>();
         } else {
             //los busco en el AnimalDao que esta estatico.
-            resultListenerDeLaView.onFinish(AnimalDao.getAnimales());
+            animalDaoFirebase.getAnimales(new ResultListener<List<Animal>>() {
+                @Override
+                public void onFinish(List<Animal> result) {
+                    resultListenerDeLaView.onFinish(result);
+                }
+
+                @Override
+                public void onError(String message) {
+                    resultListenerDeLaView.onError(message);
+                }
+            });
+
         }
 
 

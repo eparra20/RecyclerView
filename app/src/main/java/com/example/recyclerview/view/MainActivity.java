@@ -67,10 +67,10 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewFragm
         RecyclerViewFragment recyclerViewFragment = new RecyclerViewFragment();
         pegarFragment(recyclerViewFragment);
 
-        Toast.makeText(this, "hasta aca llego el codigo, aguante no debugear", Toast.LENGTH_SHORT).show();
-        Toast.makeText(this, "hasta aca llego el codigo, aguante no debugear", Toast.LENGTH_SHORT).show();
-        Toast.makeText(this, "Aguante CasamCrem con mermelada", Toast.LENGTH_SHORT).show();
-        Toast.makeText(this, "hasta aca llego el codigo, aguante no debugear", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "hasta aca llego el codigo, aguante no debugear", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "hasta aca llego el codigo, aguante no debugear", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "Aguante CasamCrem con mermelada", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "hasta aca llego el codigo, aguante no debugear", Toast.LENGTH_SHORT).show();
     }
 
     private void configurarNavigationView() {

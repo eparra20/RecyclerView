@@ -19,6 +19,11 @@ public class PhotoController {
             public void onFinish(Photo result) {
                 photoResultListenerFromView.onFinish(result);
             }
+
+            @Override
+            public void onError(String message) {
+
+            }
         });
     }
 }

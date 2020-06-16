@@ -57,7 +57,7 @@ public class DetailFragment extends Fragment {
 
         configurarToolBarEnFragment();
 
-        binding.fragmentDetailImageView.setImageResource(animal.getImagen());
+      //  binding.fragmentDetailImageView.setImageResource(animal.getImagen());
       //  binding.fragmentDetailTextViewNombreAnimal.setText(animal.getNombre());
         toolbar.setTitle(animal.getNombre());
 

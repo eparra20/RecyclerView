@@ -9,8 +9,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.recyclerview.R;
 import com.example.recyclerview.model.Animal;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.List;
 
@@ -70,7 +73,12 @@ public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.ViewHolder
         }
 
         public void onBind(Animal animal) {
-            imageViewAnimal.setImageResource(animal.getImagen());
+           //animal.getImagenReference me devuelve el STRING de la base de datos de FIREBASE donde guarde la referencia.
+            String imagenRef = animal.getImagenRef();
+            StorageReference imageReference = FirebaseStorage.getInstance().getReference(imagenRef);
+            Glide.with(imageViewAnimal.getContext()).load(imageReference).into(imageViewAnimal);
+
+
             textViewNombreAnimal.setText(animal.getNombre());
         }
     }
