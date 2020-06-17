@@ -1,15 +1,34 @@
 package com.example.recyclerview.model;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Index;
+import androidx.room.PrimaryKey;
+
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 /**
  * POJO
  * Es nuestra clase para representar cada elemento de la celda.
  */
+@Entity(indices = {
+        @Index(value = {"nombre","imagenRef"},unique = true)
+})
 public class Animal implements Serializable {
 
+
+    @PrimaryKey(autoGenerate = true)
+    private int id;
+
+    @ColumnInfo()
     private String nombre;
+
+    @ColumnInfo
     private Integer imagen;
+
+    @ColumnInfo
     private String imagenRef;
 
     public Animal() {
@@ -48,5 +67,13 @@ public class Animal implements Serializable {
 
     public void setImagenRef(String imagenRef) {
         this.imagenRef = imagenRef;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

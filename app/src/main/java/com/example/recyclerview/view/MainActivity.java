@@ -17,8 +17,10 @@ import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.room.Room;
 
 import com.example.recyclerview.R;
+import com.example.recyclerview.config.AppDatabase;
 import com.example.recyclerview.databinding.ActivityMainBinding;
 import com.example.recyclerview.model.Animal;
 import com.google.android.material.bottomnavigation.BottomNavigationView;

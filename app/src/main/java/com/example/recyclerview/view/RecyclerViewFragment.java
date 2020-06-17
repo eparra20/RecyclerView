@@ -55,7 +55,7 @@ public class RecyclerViewFragment extends Fragment implements AnimalAdapter.Anim
         recyclerViewAnimales = view.findViewById(R.id.fragmentRecyclerRecyclerView);
 
 
-        AnimalController animalController = new AnimalController();
+        AnimalController animalController = new AnimalController(getContext());
         //el getAnimals tarda 10 segundos en devolver respuesta.
         animalController.getAnimals(new ResultListener<List<Animal>>() {
             @Override
