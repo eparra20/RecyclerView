@@ -13,9 +13,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
 import com.example.recyclerview.R;
 import com.example.recyclerview.databinding.FragmentDetailBinding;
 import com.example.recyclerview.model.Animal;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 
 /**
@@ -29,6 +32,7 @@ public class DetailFragment extends Fragment {
     private Toolbar toolbar;
     private FragmentDetailBinding binding;
     private DetailFragmentListener detailFragmentListener;
+    private ActionBar supportActionBar;
 
     public DetailFragment() {
         // Required empty public constructor
@@ -53,13 +57,11 @@ public class DetailFragment extends Fragment {
 
         getActivity().getSupportFragmentManager();
 
-        toolbar = binding.activityMainToolbar;
 
         configurarToolBarEnFragment();
-
-      //  binding.fragmentDetailImageView.setImageResource(animal.getImagen());
-      //  binding.fragmentDetailTextViewNombreAnimal.setText(animal.getNombre());
-        toolbar.setTitle(animal.getNombre());
+        StorageReference imageReference = FirebaseStorage.getInstance().getReference(animal.getImagenRef());
+        Glide.with(binding.fragmentDetailImageView.getContext()).load(imageReference).into(binding.fragmentDetailImageView);
+        supportActionBar.setTitle(animal.getNombre());
 
         binding.unButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,9 +74,12 @@ public class DetailFragment extends Fragment {
     }
 
     private void configurarToolBarEnFragment() {
-        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
-        ActionBar supportActionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
+        ((AppCompatActivity)getActivity()).setSupportActionBar(binding.activityMainToolbar);
+
+        supportActionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
         supportActionBar.setDisplayHomeAsUpEnabled(true);
+        supportActionBar.setDisplayShowTitleEnabled(true);
+        supportActionBar.setHomeButtonEnabled(true);
     }
 
 

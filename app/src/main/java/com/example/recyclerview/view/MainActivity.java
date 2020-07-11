@@ -47,17 +47,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewFragm
         setContentView(view);
 
 
-        List<Integer> integerList = new ArrayList<>();
-        integerList.add(10);integerList.add(30);integerList.add(70);integerList.add(6);integerList.add(30);integerList.add(4501);integerList.add(2424);
-        integerList.add(2);integerList.add(5);integerList.add(6);integerList.add(50);integerList.add(2);integerList.add(452);integerList.add(124);
-
-        List<Integer> resultado = new ArrayList<>();
-        for (Integer integer : integerList) {
-            if (integer % 2 != 0){
-                resultado.add(integer);
-            }
-        }
-
         configurarToolBar();
 
 
@@ -69,10 +58,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewFragm
         RecyclerViewFragment recyclerViewFragment = new RecyclerViewFragment();
         pegarFragment(recyclerViewFragment);
 
-//        Toast.makeText(this, "hasta aca llego el codigo, aguante no debugear", Toast.LENGTH_SHORT).show();
-//        Toast.makeText(this, "hasta aca llego el codigo, aguante no debugear", Toast.LENGTH_SHORT).show();
-//        Toast.makeText(this, "Aguante CasamCrem con mermelada", Toast.LENGTH_SHORT).show();
-//        Toast.makeText(this, "hasta aca llego el codigo, aguante no debugear", Toast.LENGTH_SHORT).show();
     }
 
     private void configurarNavigationView() {
@@ -82,8 +67,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewFragm
     }
 
     /**
-     * Metodo para configurar la toolbar,
-     * ALERTA este metodo tiene que ejecutarse despues de {@link #findViews()}
+     * Metodo para configurar la toolb
      */
     private void configurarToolBar() {
         setSupportActionBar(binding.includeToolBar.activityMainToolbar);
